@@ -4,12 +4,14 @@ export interface UserPreferencesState {
   favoriteCategories: string[];
   darkMode: boolean;
   feedOrder: string[];
+  trendingOrder: string[];
 }
 
 const initialState: UserPreferencesState = {
   favoriteCategories: [],
   darkMode: false,
   feedOrder: [],
+  trendingOrder: [],
 };
 
 export const preferencesSlice = createSlice({
@@ -38,6 +40,9 @@ export const preferencesSlice = createSlice({
     setFeedOrder: (state, action: PayloadAction<string[]>) => {
       state.feedOrder = action.payload;
     },
+    setTrendingOrder: (state, action: PayloadAction<string[]>) => {
+      state.trendingOrder = action.payload;
+    },
   },
 });
 
@@ -48,6 +53,7 @@ export const {
   removeCategory,
   setCategories,
   setFeedOrder,
+  setTrendingOrder,
 } = preferencesSlice.actions;
 
 export default preferencesSlice.reducer;

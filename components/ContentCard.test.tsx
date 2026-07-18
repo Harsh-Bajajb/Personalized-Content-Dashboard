@@ -7,11 +7,14 @@ import ContentCard from './ContentCard';
 import favoritesReducer from '../features/favorites/favoritesSlice';
 
 // Helper to render with a Redux store
-const renderWithStore = (component: React.ReactElement, preloadedState?: any) => {
+const renderWithStore = (
+  component: React.ReactElement,
+  preloadedState?: Record<string, unknown>
+) => {
   const store = configureStore({
     reducer: {
       favorites: favoritesReducer,
-      // Provide dummy reducers for other slices if needed by ContentCard 
+      // Provide dummy reducers for other slices if needed by ContentCard
       // (Currently it only uses favorites)
     },
     preloadedState,
@@ -37,7 +40,7 @@ describe('ContentCard', () => {
     expect(screen.getByText('Test Title')).toBeTruthy();
     expect(screen.getByText('Test Description')).toBeTruthy();
     expect(screen.getByText('Test Badge')).toBeTruthy();
-    
+
     const image = screen.getByRole('img');
     expect(image).toHaveAttribute('src', mockProps.imageUrl);
   });
@@ -48,7 +51,7 @@ describe('ContentCard', () => {
     });
 
     const favButton = screen.getByLabelText('Toggle Favorite');
-    
+
     // Initially not favorited
     expect(store.getState().favorites.itemIds).not.toContain('test-id');
 

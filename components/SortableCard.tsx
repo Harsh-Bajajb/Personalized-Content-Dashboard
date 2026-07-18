@@ -29,8 +29,7 @@ export default function SortableCard({ id, item }: SortableCardProps) {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    zIndex: isDragging ? 10 : 1,
-    opacity: isDragging ? 0.8 : 1,
+    opacity: isDragging ? 0.3 : 1,
   };
 
   return (

@@ -7,6 +7,7 @@ import { useGetPostsByHashtagQuery } from '../../lib/api/socialApi';
 import { useAppDispatch, useAppSelector } from '../../lib/hooks';
 import { setFeedOrder } from '../../features/preferences/preferencesSlice';
 import { motion } from 'framer-motion';
+import ContentCard from '../../components/ContentCard';
 
 import {
   DndContext,
@@ -16,6 +17,8 @@ import {
   useSensor,
   useSensors,
   DragEndEvent,
+  DragStartEvent,
+  DragOverlay,
 } from '@dnd-kit/core';
 import {
   arrayMove,
@@ -28,6 +31,7 @@ import SortableCard from '../../components/SortableCard';
 
 export default function DashboardFeed() {
   const [visibleCount, setVisibleCount] = useState(6);
+  const [activeId, setActiveId] = useState<string | null>(null);
   const dispatch = useAppDispatch();
   const customOrder = useAppSelector((state) => state.preferences.feedOrder);
 
@@ -138,7 +142,12 @@ export default function DashboardFeed() {
     })
   );
 
+  const handleDragStart = (event: DragStartEvent) => {
+    setActiveId(event.active.id as string);
+  };
+
   const handleDragEnd = (event: DragEndEvent) => {
+    setActiveId(null);
     const { active, over } = event;
 
     if (over && active.id !== over.id) {
@@ -152,6 +161,10 @@ export default function DashboardFeed() {
       const newOrderIds = newArray.map((i) => i.id);
       dispatch(setFeedOrder(newOrderIds));
     }
+  };
+
+  const handleDragCancel = () => {
+    setActiveId(null);
   };
 
   if (isLoading) {
@@ -192,7 +205,9 @@ export default function DashboardFeed() {
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
+        onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
+        onDragCancel={handleDragCancel}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           <SortableContext
@@ -204,6 +219,24 @@ export default function DashboardFeed() {
             ))}
           </SortableContext>
         </div>
+
+        <DragOverlay>
+          {activeId
+            ? (() => {
+                const activeItem = orderedItems.find((i) => i.id === activeId);
+                if (!activeItem) return null;
+                return (
+                  <ContentCard
+                    id={activeItem.originalId}
+                    title={activeItem.title}
+                    description={activeItem.description}
+                    imageUrl={activeItem.imageUrl}
+                    badgeText={activeItem.badgeText}
+                  />
+                );
+              })()
+            : null}
+        </DragOverlay>
       </DndContext>
 
       {hasMore && (

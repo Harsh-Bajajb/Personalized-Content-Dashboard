@@ -33,12 +33,18 @@ const renderWithStore = (component: React.ReactElement) => {
 
 describe('DashboardFeed', () => {
   it('renders loading state', () => {
-    (useGetNewsByCategoryQuery as jest.Mock).mockReturnValue({ isLoading: true });
-    (useGetRecommendationsQuery as jest.Mock).mockReturnValue({ isLoading: true });
-    (useGetPostsByHashtagQuery as jest.Mock).mockReturnValue({ isLoading: true });
+    (useGetNewsByCategoryQuery as jest.Mock).mockReturnValue({
+      isLoading: true,
+    });
+    (useGetRecommendationsQuery as jest.Mock).mockReturnValue({
+      isLoading: true,
+    });
+    (useGetPostsByHashtagQuery as jest.Mock).mockReturnValue({
+      isLoading: true,
+    });
 
     const { container } = renderWithStore(<DashboardFeed />);
-    
+
     // We expect the framer motion spinner div (the one with rounded-full border-blue-600)
     // We can just check if there's a div with the expected classes or test-id
     const spinner = container.querySelector('.rounded-full.border-blue-600');
@@ -46,32 +52,68 @@ describe('DashboardFeed', () => {
   });
 
   it('renders empty state when no items found', () => {
-    (useGetNewsByCategoryQuery as jest.Mock).mockReturnValue({ data: { data: [], isEmpty: true }, isLoading: false });
-    (useGetRecommendationsQuery as jest.Mock).mockReturnValue({ data: { data: [], isEmpty: true }, isLoading: false });
-    (useGetPostsByHashtagQuery as jest.Mock).mockReturnValue({ data: { data: [], isEmpty: true }, isLoading: false });
+    (useGetNewsByCategoryQuery as jest.Mock).mockReturnValue({
+      data: { data: [], isEmpty: true },
+      isLoading: false,
+    });
+    (useGetRecommendationsQuery as jest.Mock).mockReturnValue({
+      data: { data: [], isEmpty: true },
+      isLoading: false,
+    });
+    (useGetPostsByHashtagQuery as jest.Mock).mockReturnValue({
+      data: { data: [], isEmpty: true },
+      isLoading: false,
+    });
 
     renderWithStore(<DashboardFeed />);
-    
+
     expect(screen.getByText('No items found')).toBeTruthy();
     expect(screen.getByText('Check back later for more updates.')).toBeTruthy();
   });
 
   it('renders content when data is fetched successfully', () => {
     (useGetNewsByCategoryQuery as jest.Mock).mockReturnValue({
-      data: { data: [{ id: 'news1', title: 'News 1', description: 'desc', publishedAt: '2023-10-01' }] },
-      isLoading: false
+      data: {
+        data: [
+          {
+            id: 'news1',
+            title: 'News 1',
+            description: 'desc',
+            publishedAt: '2023-10-01',
+          },
+        ],
+      },
+      isLoading: false,
     });
     (useGetRecommendationsQuery as jest.Mock).mockReturnValue({
-      data: { data: [{ id: 'rec1', title: 'Rec 1', overview: 'desc', releaseDate: '2023-10-02' }] },
-      isLoading: false
+      data: {
+        data: [
+          {
+            id: 'rec1',
+            title: 'Rec 1',
+            overview: 'desc',
+            releaseDate: '2023-10-02',
+          },
+        ],
+      },
+      isLoading: false,
     });
     (useGetPostsByHashtagQuery as jest.Mock).mockReturnValue({
-      data: { data: [{ id: 'soc1', author: 'Author 1', content: 'content', createdAt: '2023-10-03' }] },
-      isLoading: false
+      data: {
+        data: [
+          {
+            id: 'soc1',
+            author: 'Author 1',
+            content: 'content',
+            createdAt: '2023-10-03',
+          },
+        ],
+      },
+      isLoading: false,
     });
 
     renderWithStore(<DashboardFeed />);
-    
+
     expect(screen.getByText('News 1')).toBeTruthy();
     expect(screen.getByText('Rec 1')).toBeTruthy();
     expect(screen.getByText('Post by Author 1')).toBeTruthy();

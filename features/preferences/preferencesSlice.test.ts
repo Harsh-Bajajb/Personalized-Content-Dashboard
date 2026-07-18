@@ -21,7 +21,7 @@ describe('preferencesSlice', () => {
   it('should handle toggleDarkMode', () => {
     const actual = reducer(initialState, toggleDarkMode());
     expect(actual.darkMode).toEqual(true);
-    
+
     const actual2 = reducer(actual, toggleDarkMode());
     expect(actual2.darkMode).toEqual(false);
   });
