@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { Menu, Search, User } from 'lucide-react';
 
-
 interface HeaderProps {
   toggleSidebar: () => void;
   onSearch: (term: string) => void;
@@ -20,11 +19,11 @@ export default function Header({ toggleSidebar, onSearch }: HeaderProps) {
   };
 
   return (
-    <header className="flex items-center justify-between px-4 py-3 bg-white border-b border-gray-200">
+    <header className="flex items-center justify-between px-4 py-3 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 transition-colors">
       <div className="flex items-center gap-4 flex-1">
         <button
           onClick={toggleSidebar}
-          className="p-1 md:hidden text-gray-500 hover:bg-gray-100 rounded-md"
+          className="p-1 md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
         >
           <Menu size={24} />
         </button>
@@ -38,13 +37,13 @@ export default function Header({ toggleSidebar, onSearch }: HeaderProps) {
             placeholder="Search feed..."
             value={searchTerm}
             onChange={handleSearchChange}
-            className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-gray-50 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-colors"
+            className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md leading-5 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-colors"
           />
         </div>
       </div>
 
       <div className="flex items-center ml-4">
-        <button className="flex items-center gap-2 p-1 text-gray-500 hover:bg-gray-100 rounded-full md:rounded-md md:px-3 md:py-2 transition-colors">
+        <button className="flex items-center gap-2 p-1 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full md:rounded-md md:px-3 md:py-2 transition-colors">
           <User size={20} />
           <span className="hidden md:block text-sm font-medium">Profile</span>
         </button>

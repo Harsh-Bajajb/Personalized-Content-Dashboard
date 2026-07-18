@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export interface UserPreferencesState {
   favoriteCategories: string[];
   darkMode: boolean;
+  feedOrder: string[];
 }
 
 const initialState: UserPreferencesState = {
   favoriteCategories: [],
   darkMode: false,
+  feedOrder: [],
 };
 
 export const preferencesSlice = createSlice({
@@ -33,6 +35,9 @@ export const preferencesSlice = createSlice({
     setCategories: (state, action: PayloadAction<string[]>) => {
       state.favoriteCategories = action.payload;
     },
+    setFeedOrder: (state, action: PayloadAction<string[]>) => {
+      state.feedOrder = action.payload;
+    },
   },
 });
 
@@ -42,6 +47,7 @@ export const {
   addCategory,
   removeCategory,
   setCategories,
+  setFeedOrder,
 } = preferencesSlice.actions;
 
 export default preferencesSlice.reducer;
