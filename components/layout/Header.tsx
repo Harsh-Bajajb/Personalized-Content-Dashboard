@@ -19,7 +19,10 @@ export default function Header({ toggleSidebar, onSearch }: HeaderProps) {
   };
 
   return (
-    <header aria-label="Top Header" className="flex items-center justify-between px-4 py-3 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 transition-colors">
+    <header
+      aria-label="Top Header"
+      className="flex items-center justify-between px-4 py-3 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 transition-colors"
+    >
       <div className="flex items-center gap-4 flex-1">
         <button
           onClick={toggleSidebar}
@@ -45,7 +48,10 @@ export default function Header({ toggleSidebar, onSearch }: HeaderProps) {
       </div>
 
       <div className="flex items-center ml-4">
-        <button aria-label="User Profile" className="flex items-center gap-2 p-1 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full md:rounded-md md:px-3 md:py-2 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button
+          aria-label="User Profile"
+          className="flex items-center gap-2 p-1 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full md:rounded-md md:px-3 md:py-2 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
           <User size={20} />
           <span className="hidden md:block text-sm font-medium">Profile</span>
         </button>

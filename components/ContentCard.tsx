@@ -94,7 +94,9 @@ export default function ContentCard({
                 ? 'text-red-500 bg-red-50 dark:bg-red-500/10 hover:bg-red-100 dark:hover:bg-red-500/20'
                 : 'text-gray-400 hover:text-red-500 hover:bg-gray-50 dark:hover:bg-gray-700'
             }`}
-            aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+            aria-label={
+              isFavorite ? 'Remove from favorites' : 'Add to favorites'
+            }
           >
             <Heart size={20} className={isFavorite ? 'fill-current' : ''} />
           </button>

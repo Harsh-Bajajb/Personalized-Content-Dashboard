@@ -25,11 +25,15 @@ export default function SettingsPage() {
 
       <div className="bg-white dark:bg-[#1e2332] shadow-sm rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden transition-colors">
         <div className="p-6">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Appearance</h3>
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">
+            Appearance
+          </h3>
 
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-medium text-gray-700 dark:text-gray-200">Dark Mode</p>
+              <p className="font-medium text-gray-700 dark:text-gray-200">
+                Dark Mode
+              </p>
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 Toggle dark mode for the application (mock implementation)
               </p>
