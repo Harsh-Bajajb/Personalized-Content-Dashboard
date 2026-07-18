@@ -38,7 +38,8 @@ export default function SortableCard({ id, item }: SortableCardProps) {
       style={style}
       {...attributes}
       {...listeners}
-      className="touch-none"
+      aria-label={`Drag handle for ${item.title}`}
+      className="touch-none focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl"
     >
       <ContentCard
         id={item.originalId}

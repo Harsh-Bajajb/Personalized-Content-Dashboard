@@ -189,7 +189,7 @@ export default function DashboardFeed() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <section aria-label="Feed" className="max-w-7xl mx-auto">
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
@@ -249,6 +249,6 @@ export default function DashboardFeed() {
           </button>
         </div>
       )}
-    </div>
+    </section>
   );
 }

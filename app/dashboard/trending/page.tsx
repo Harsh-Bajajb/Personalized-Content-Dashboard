@@ -124,7 +124,7 @@ export default function TrendingPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <section aria-label="Trending" className="max-w-7xl mx-auto">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
           Trending Now
@@ -170,6 +170,6 @@ export default function TrendingPage() {
             : null}
         </DragOverlay>
       </DndContext>
-    </div>
+    </section>
   );
 }

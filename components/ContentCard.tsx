@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { Heart } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../lib/hooks';
 import { toggleFavorite } from '../features/favorites/favoritesSlice';
@@ -42,11 +43,13 @@ export default function ContentCard({
     >
       {imageUrl && (
         <div className="relative h-48 w-full bg-gray-200 dark:bg-gray-700">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={imageUrl}
             alt={title}
-            className="w-full h-full object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            loading="lazy"
+            className="object-cover"
           />
           {badgeText && (
             <span className="absolute top-2 left-2 bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded-md shadow-sm">
@@ -72,7 +75,7 @@ export default function ContentCard({
         <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-50 dark:border-gray-700">
           <button
             onClick={onCtaClick}
-            className="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
+            className="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md px-2 py-1 -ml-2"
           >
             {ctaText}
           </button>
@@ -80,12 +83,18 @@ export default function ContentCard({
           <button
             onClick={handleFavoriteClick}
             onPointerDown={(e) => e.stopPropagation()} // Prevent drag conflict
-            className={`p-2 rounded-full transition-colors ${
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleFavoriteClick();
+              }
+            }}
+            className={`p-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ${
               isFavorite
                 ? 'text-red-500 bg-red-50 dark:bg-red-500/10 hover:bg-red-100 dark:hover:bg-red-500/20'
                 : 'text-gray-400 hover:text-red-500 hover:bg-gray-50 dark:hover:bg-gray-700'
             }`}
-            aria-label="Toggle Favorite"
+            aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
           >
             <Heart size={20} className={isFavorite ? 'fill-current' : ''} />
           </button>

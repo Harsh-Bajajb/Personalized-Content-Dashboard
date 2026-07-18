@@ -75,3 +75,17 @@ Navigate to [http://localhost:3000/dashboard](http://localhost:3000/dashboard) t
 - **Drag-and-Drop Reordering:** Fully functional card reordering utilizing `@dnd-kit/core` and `@dnd-kit/sortable`, persisting the custom order to Redux.
 - **Animations:** High-end `framer-motion` implementations including card hover scaling, page-transition fade-ins, and a custom loading spinner.
 - **Dark Mode:** System-wide dark mode styling utilizing Tailwind's `dark:` classes, controlled by the user's Redux preferences state.
+
+## ♿ Accessibility & Performance
+
+- **Semantic HTML & ARIA:** Layouts utilize semantic elements (`<nav>`, `<header>`, `<main>`, `<section>`). Interactive elements and toggles feature descriptive `aria-label`s.
+- **Keyboard Navigation:** Full keyboard operability implemented across the application, with visible focus states (`focus:ring`) on search bars, nav links, favorite buttons, and dark mode toggles.
+- **Lazy Loading:** All imagery is powered by Next.js `<Image>`, utilizing `loading="lazy"` and native responsive sizing optimizations for improved Core Web Vitals.
+
+## 🔮 Known Gaps / Future Improvements
+
+- **Authentication (NextAuth)** — not implemented, moderate effort to add via NextAuth.js
+- **Real-time updates (WebSockets/SSE)** — not implemented, moderate effort using a polling fallback or socket.io
+- **Multi-language support (react-i18next)** — not implemented, low-to-moderate effort since components already use string props
+- **Full E2E coverage of auth flow** — skipped since auth isn't built; easy to add once auth exists
+- **Formal accessibility audit (axe-core/Lighthouse)** — basic ARIA/keyboard support added, but no automated audit run yet

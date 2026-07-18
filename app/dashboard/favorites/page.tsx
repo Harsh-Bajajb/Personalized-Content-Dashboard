@@ -87,7 +87,7 @@ export default function FavoritesPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <section aria-label="Favorites" className="max-w-7xl mx-auto">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
           Your Favorites
@@ -132,6 +132,6 @@ export default function FavoritesPage() {
             : null}
         </DragOverlay>
       </DndContext>
-    </div>
+    </section>
   );
 }
