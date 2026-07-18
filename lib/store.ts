@@ -4,6 +4,10 @@ import preferencesReducer from '../features/preferences/preferencesSlice';
 import favoritesReducer from '../features/favorites/favoritesSlice';
 import { loadState, saveState } from './localStorage';
 
+import { newsApi } from './api/newsApi';
+import { recommendationsApi } from './api/recommendationsApi';
+import { socialApi } from './api/socialApi';
+
 const PREFERENCES_STATE_KEY = 'app_preferences_state';
 const FAVORITES_STATE_KEY = 'app_favorites_state';
 
@@ -15,11 +19,20 @@ export const store = configureStore({
     counter: counterReducer,
     preferences: preferencesReducer,
     favorites: favoritesReducer,
+    [newsApi.reducerPath]: newsApi.reducer,
+    [recommendationsApi.reducerPath]: recommendationsApi.reducer,
+    [socialApi.reducerPath]: socialApi.reducer,
   },
   preloadedState: {
     ...(preloadedPreferences ? { preferences: preloadedPreferences } : {}),
     ...(preloadedFavorites ? { favorites: preloadedFavorites } : {}),
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(
+      newsApi.middleware,
+      recommendationsApi.middleware,
+      socialApi.middleware
+    ),
 });
 
 store.subscribe(() => {
